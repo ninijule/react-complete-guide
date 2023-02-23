@@ -7,8 +7,8 @@ function ExpenseForm(props) {
   // const [date, setDate] = useState("");
 
   const [userInput, setUserInput] = useState({
-    enteredTitle: "",
-    number: "",
+    title: "",
+    amount: "",
     date: "",
   });
 
@@ -21,7 +21,7 @@ function ExpenseForm(props) {
     setUserInput((prevState) => {
       return {
         ...prevState,
-        enteredTitle: event.target.value,
+        title: event.target.value,
       };
     });
   };
@@ -29,7 +29,7 @@ function ExpenseForm(props) {
   const saveNumber = (event) => {
     setUserInput({
       ...userInput,
-      number: event.target.value,
+      amount: event.target.value,
     });
   };
 
@@ -59,14 +59,14 @@ function ExpenseForm(props) {
           <input
             type="text"
             onChange={dateInputed}
-            value={userInput.enteredTitle}
+            value={userInput.title}
           />
         </div>
       </div>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Number</label>
-          <input type="number" min="0.01" step="0.01" onChange={saveNumber} value={userInput.number} />
+          <input type="number" min="0.01" step="0.01" onChange={saveNumber} value={userInput.amount} />
         </div>
       </div>
       <div className="new-expense__controls">
