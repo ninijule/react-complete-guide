@@ -6,6 +6,8 @@ function ExpenseForm(props) {
   // const [number, setNumber] = useState("");
   // const [date, setDate] = useState("");
 
+  const [showForm, setShowForm] = useState(props.showForm);
+
   const [userInput, setUserInput] = useState({
     title: "",
     amount: "",
@@ -51,34 +53,54 @@ function ExpenseForm(props) {
     // });
   };
 
+  const handleShowForm = () => {
+    setShowForm(!showForm);
+  }
+
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Title</label>
-          <input
-            type="text"
-            onChange={dateInputed}
-            value={userInput.title}
-          />
+    <div>
+      {
+        showForm == false && <div className="new-expense__controls">
+          <div className="new-expense__actions">
+            <button onClick={handleShowForm}>Add Expense</button>
+          </div>
         </div>
-      </div>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Number</label>
-          <input type="number" min="0.01" step="0.01" onChange={saveNumber} value={userInput.amount} />
+      }
+
+
+      {
+        showForm && <div>
+          <form onSubmit={submitHandler}>
+            <div className="new-expense__controls">
+              <div className="new-expense__control">
+                <label>Title</label>
+                <input
+                  type="text"
+                  onChange={dateInputed}
+                  value={userInput.title}
+                />
+              </div>
+            </div>
+            <div className="new-expense__controls">
+              <div className="new-expense__control">
+                <label>Number</label>
+                <input type="number" min="0.01" step="0.01" onChange={saveNumber} value={userInput.amount} />
+              </div>
+            </div>
+            <div className="new-expense__controls">
+              <div className="new-expense__control">
+                <label>Date</label>
+                <input type="date" onChange={saveDate} value={userInput.date} />
+              </div>
+            </div>
+            <div className="new-expense__actions">
+              <button onClick={handleShowForm}>Cancel</button>
+              <button type="submit">Add Expense</button>
+            </div>
+          </form>
         </div>
-      </div>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Date</label>
-          <input type="date" onChange={saveDate} value={userInput.date} />
-        </div>
-      </div>
-      <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
-      </div>
-    </form>
+      }
+    </div>
   );
 }
 export default ExpenseForm;
